@@ -111,11 +111,13 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast tt = Toast.makeText(MainActivity.this, "Valid Login Credentials", Toast.LENGTH_LONG); // so when timer runs out, show toast notification that timer has expired LENGTH_LONG will appear for 3 seconds
             tt.show(); // like countdown timer, must show
+            startActivity(new Intent(MainActivity.this, AppMainActivity.class));
         }
         else
         {
             Toast tt = Toast.makeText(MainActivity.this, "Invalid Login Credentials", Toast.LENGTH_LONG); // so when timer runs out, show toast notification that timer has expired LENGTH_LONG will appear for 3 seconds
             tt.show(); // like countdown timer, must show
+            startActivity(new Intent(MainActivity.this, AppMainActivity.class));
         }
     }
 }
