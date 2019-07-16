@@ -49,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
             profileEmail.setText("Email: "+personEmail);
         }
 
+        //SignOut Button
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

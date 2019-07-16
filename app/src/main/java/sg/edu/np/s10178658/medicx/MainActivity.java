@@ -1,13 +1,13 @@
 package sg.edu.np.s10178658.medicx;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -16,17 +16,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "AndroidClarified";
     int RC_SIGN_IN = 0;
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton googleSignInButton;
+    DbHandler db;
+    Account a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +51,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
+
+        db = new DbHandler(this, null, null, 1);
+
+        TextView newUser = findViewById(R.id.txtNewUser);
+        newUser.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN)
+                {
+                    Intent intent = new Intent(MainActivity.this, CreateNewUser.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -93,30 +108,29 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    public void onClick(View v)
+    public void onClickLogin(View v)
     {
-        EditText et1 = findViewById(R.id.editText);
-        EditText et2 = findViewById(R.id.editText2);
+        EditText et1 = findViewById(R.id.editTextUsername);
+        EditText et2 = findViewById(R.id.editTextPassword);
         String userName = et1.getText().toString();
         String password = et2.getText().toString();
 
-        Pattern pattern = Pattern.compile("^[0-9a-zA-Z]{6,12}$"); //means must be between 6-12 characters and alpha numeric
-        Matcher matcher = pattern.matcher(userName);
+        a = db.findAccount(userName);
 
-        Pattern pattern2 = Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*+=]).*$"); //means at least 1 symbol, 1 uppercase, 1 numeric
-        Matcher matcher2 = pattern2.matcher(password);
-
-        //calling matches method, return true or false, searching for the pattern, and display output
-        if(matcher.matches() == true && matcher2.matches() == true)
+        if(userName.equals(a.getUsername()) && password.equals(a.getPassword())) //checking if matching username and password exists in the database
         {
-            Toast tt = Toast.makeText(MainActivity.this, "Valid Login Credentials", Toast.LENGTH_LONG); // so when timer runs out, show toast notification that timer has expired LENGTH_LONG will appear for 3 seconds
-            tt.show(); // like countdown timer, must show
+            //Show toast message saying that login credentials are valid
+            Toast tt = Toast.makeText(MainActivity.this, "Valid Login Credentials", Toast.LENGTH_LONG); //LENGTH_LONG - toast appear for 3 seconds
+            tt.show();
+            //Bring user to AppMain page
             startActivity(new Intent(MainActivity.this, AppMainActivity.class));
         }
         else
         {
-            Toast tt = Toast.makeText(MainActivity.this, "Invalid Login Credentials", Toast.LENGTH_LONG); // so when timer runs out, show toast notification that timer has expired LENGTH_LONG will appear for 3 seconds
-            tt.show(); // like countdown timer, must show
+            //Show toast message saying that login credentials are invalid
+            Toast tt = Toast.makeText(MainActivity.this, "Invalid Login Credentials", Toast.LENGTH_LONG); //LENGTH_LONG - toast appear for 3 seconds
+            tt.show();
+            //Not supposed to be here, for testing purposes only, without needing login credentials
             startActivity(new Intent(MainActivity.this, AppMainActivity.class));
         }
     }
