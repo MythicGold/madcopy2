@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CreateNewUser extends AppCompatActivity {
+public class CreateNewUserActivity extends AppCompatActivity {
     DbHandler db;
 
     @Override
@@ -27,7 +27,7 @@ public class CreateNewUser extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CreateNewUser.this, MainActivity.class);
+                Intent intent = new Intent(CreateNewUserActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -57,15 +57,15 @@ public class CreateNewUser extends AppCompatActivity {
                     db.addAccount(a);
 
                     //Show toast message saying that new user is created
-                    Toast tt = Toast.makeText(CreateNewUser.this, "New User Created.", Toast.LENGTH_LONG); //LENGTH_LONG - toast appear for 3 seconds
+                    Toast tt = Toast.makeText(CreateNewUserActivity.this, "New User Created.", Toast.LENGTH_LONG); //LENGTH_LONG - toast appear for 3 seconds
                     tt.show();
                     //Bring user to Login page
-                    startActivity(new Intent(CreateNewUser.this, MainActivity.class));
+                    startActivity(new Intent(CreateNewUserActivity.this, MainActivity.class));
                 }
                 else
                 {
                     //Show toast message saying that login credentials are invalid
-                    Toast tt = Toast.makeText(CreateNewUser.this, "Invalid Input.", Toast.LENGTH_LONG); //LENGTH_LONG - toast appear for 3 seconds
+                    Toast tt = Toast.makeText(CreateNewUserActivity.this, "Invalid Input.", Toast.LENGTH_LONG); //LENGTH_LONG - toast appear for 3 seconds
                     tt.show();
                 }
             }

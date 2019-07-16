@@ -60,7 +60,21 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN)
                 {
-                    Intent intent = new Intent(MainActivity.this, CreateNewUser.class);
+                    Intent intent = new Intent(MainActivity.this, CreateNewUserActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        TextView forgetPassword = findViewById(R.id.txtForgetPassword);
+        forgetPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN)
+                {
+                    Intent intent = new Intent(MainActivity.this, ForgetPasswordActivity.class);
                     startActivity(intent);
                     return true;
                 }

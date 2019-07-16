@@ -66,12 +66,19 @@ public class DbHandler extends SQLiteOpenHelper {
             cursor.close();
         }
         else {
-            a = new Account();
             a.setUsername(null);
             a.setPassword(null);
         }
 
         db.close();
         return a;
+    }
+
+    public void updatePassword(String username, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PASSWORD, password);
+        db.update(ACCOUNTS, values, COLUMN_USERNAME+" = ?",new String[] { username });
+        db.close();
     }
 }
