@@ -5,10 +5,14 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class QueueTicket extends AppCompatActivity {
     Account a;
@@ -19,6 +23,7 @@ public class QueueTicket extends AppCompatActivity {
     TextView timeCount;
 
     TextView counter;
+    TextView timeStamp;
 
     Button btnBack;
     Button btnLeave;
@@ -33,6 +38,7 @@ public class QueueTicket extends AppCompatActivity {
         qNo = findViewById(R.id.tvQNo);
         timeCount = findViewById(R.id.tvTimeCount);
         counter = findViewById(R.id.tvCounter);
+        timeStamp = findViewById(R.id.tvTimeStamp);
         btnBack = findViewById(R.id.btnBack);
         btnLeave = findViewById(R.id.btnLeaveQ);
 
@@ -56,6 +62,10 @@ public class QueueTicket extends AppCompatActivity {
             }
         };
         cdt.start();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+        String format = simpleDateFormat.format(new Date());
+        timeStamp.setText("Current timestamp: " + format);
 
 
         btnBack.setOnTouchListener(new View.OnTouchListener() {
