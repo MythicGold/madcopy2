@@ -4,16 +4,16 @@ import java.util.Random;
 
 public class RandomTicketNumber {
 
-    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final Random random = new Random();
 
     public String generateString(int length) {
-        Random random = new Random();
         StringBuilder builder = new StringBuilder(length);
 
-        for (int i = 0; i < length; i++) {
-            builder.append(ALPHABET.charAt(random.nextInt(ALPHABET.length())));
+        for (int i = 0; i <= length; i++) {
+            builder.append(alphabet.charAt(random.nextInt(alphabet.length())));
         }
-
         return builder.toString();
     }
+
 }

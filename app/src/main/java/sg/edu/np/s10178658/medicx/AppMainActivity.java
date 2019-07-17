@@ -21,8 +21,7 @@ public class AppMainActivity extends AppCompatActivity {
         btnTixNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AppMainActivity.this, QueueTicketActivity.class));
-
+                startActivity(new Intent(AppMainActivity.this, QueueTicket.class));
             }
         });
     }

@@ -31,11 +31,9 @@ public class QueueTicketActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
         setContentView(R.layout.activity_queue_ticket);
 
-
-        username = findViewById(R.id.tvUsername);
+        /*username = findViewById(R.id.tvUsername);
         qNo = findViewById(R.id.tvQNo);
         timeCount = findViewById(R.id.tvTimeCount);
         counter = findViewById(R.id.tvCounter);
