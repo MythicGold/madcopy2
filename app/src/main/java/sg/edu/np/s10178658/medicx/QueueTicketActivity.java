@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class QueueTicket extends AppCompatActivity {
+public class QueueTicketActivity extends AppCompatActivity {
     Account a;
     TextView qNo;
     TextView username;
@@ -32,7 +31,9 @@ public class QueueTicket extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
         setContentView(R.layout.activity_queue_ticket);
+
 
         username = findViewById(R.id.tvUsername);
         qNo = findViewById(R.id.tvQNo);
@@ -72,7 +73,7 @@ public class QueueTicket extends AppCompatActivity {
         btnBack.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                startActivity(new Intent(QueueTicket.this, AppMainActivity.class));
+                startActivity(new Intent(QueueTicketActivity.this, AppMainActivity.class));
                 return true;
             }
         });
@@ -80,10 +81,10 @@ public class QueueTicket extends AppCompatActivity {
         btnLeave.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                startActivity(new Intent(QueueTicket.this, AppMainActivity.class));
+                startActivity(new Intent(QueueTicketActivity.this, AppMainActivity.class));
                 return true;
             }
-        });
+        });*/
     }
 
 }
