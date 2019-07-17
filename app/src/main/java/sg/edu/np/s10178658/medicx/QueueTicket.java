@@ -1,7 +1,11 @@
 package sg.edu.np.s10178658.medicx;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -45,7 +49,7 @@ public class QueueTicket extends AppCompatActivity {
         //generate string with 5 symbols
         qNo.setText(generateString(5));
 
-        cdt = new CountDownTimer(25 * 60000, 1000) {
+        cdt = new CountDownTimer(1 * 60000, 1000) {
             @Override
             public void onTick(long l) {
                 Long min = l / 60000;
@@ -55,7 +59,8 @@ public class QueueTicket extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                timeCount.setText("Time before your turn: 0:00");
+                timeCount.setText("Time before your turn: " + "\n" + "0:00");
+                //addNotification();
             }
         };
         cdt.start();
@@ -90,4 +95,19 @@ public class QueueTicket extends AppCompatActivity {
         }
         return builder.toString();
     }
+
+    /*private void addNotification(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setContentTitle("Madics")
+                .setContentText("Check your for your queue status!");
+
+        Intent notificationIntent = new Intent(this, QueueTicket.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+
+        //Add as notification
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0, builder.build());
+    }*/
 }
