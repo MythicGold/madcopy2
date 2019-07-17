@@ -42,6 +42,7 @@ public class QueueTicket extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnLeave = findViewById(R.id.btnLeaveQ);
 
+        //Get random tix num
         RandomTicketNumber rtn = new RandomTicketNumber();
         rtn.generateString(5);
 
