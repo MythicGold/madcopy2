@@ -1,8 +1,5 @@
 package sg.edu.np.s10178658.medicx;
 
-import java.security.SecureRandom;
-import java.util.Locale;
-import java.util.Objects;
 import java.util.Random;
 
 public class RandomTicketNumber {
