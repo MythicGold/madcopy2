@@ -1,14 +1,13 @@
 package sg.edu.np.s10178658.medicx;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -60,7 +59,7 @@ public class QueueTicket extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timeCount.setText("Time before your turn: " + "\n" + "0:00");
-                //addNotification();
+                addNotification();
             }
         };
         cdt.start();
@@ -96,18 +95,22 @@ public class QueueTicket extends AppCompatActivity {
         return builder.toString();
     }
 
-    /*private void addNotification(){
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+    private void addNotification(){
+        Notification.Builder builder = new Notification.Builder(this)
                 .setContentTitle("Madics")
-                .setContentText("Check your for your queue status!");
+                .setContentText("Check your for your queue status!")
+                .setSmallIcon(R.mipmap.ic_launcher);
 
-        Intent notificationIntent = new Intent(this, QueueTicket.class);
+        Intent notificationIntent = new Intent(QueueTicket.this, QueueTicket.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                0);
+        //to be able to launch your activity from the notification
         builder.setContentIntent(contentIntent);
 
         //Add as notification
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(0, builder.build());
-    }*/
+        NotificationManager notifManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notifManager.notify(001, builder.build());
+    }
+
 }
