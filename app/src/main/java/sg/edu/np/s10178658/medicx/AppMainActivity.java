@@ -18,6 +18,8 @@ public class AppMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_main);
 
+        btnTixNum = findViewById(R.id.btnTixNum);
+
         btnTixNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
