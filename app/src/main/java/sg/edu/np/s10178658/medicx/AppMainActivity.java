@@ -18,11 +18,11 @@ public class AppMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_main);
 
-        btnTixNum.setOnTouchListener(new View.OnTouchListener() {
+        btnTixNum.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 startActivity(new Intent(AppMainActivity.this, QueueTicket.class));
-                return true;
+
             }
         });
     }
