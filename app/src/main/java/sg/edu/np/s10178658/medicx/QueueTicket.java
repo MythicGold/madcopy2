@@ -6,11 +6,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,23 +20,28 @@ import java.util.Random;
 
 public class QueueTicket extends AppCompatActivity {
     Account a;
-    TextView qNo;
-    TextView txtUsername;
+    Ticket t;
+    TextView qNo; //queue number
+    TextView txtUsername; //get username from login page
 
     CountDownTimer cdt;
-    TextView timeCount;
+    long timeLeft;
+    TextView timeCount; //display cdt
 
-    TextView counter;
-    TextView timeStamp;
+    TextView counter; //number of people in queue
+    TextView timeStamp; //display timestamp
 
     Button btnBack;
     Button btnLeave;
+
+    DbHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue_ticket2);
 
+        db = new DbHandler(this, null, null, 1);
         txtUsername = findViewById(R.id.textView13);
         qNo = findViewById(R.id.textView15);
         timeCount = findViewById(R.id.textView16);
@@ -43,22 +50,30 @@ public class QueueTicket extends AppCompatActivity {
         btnBack = findViewById(R.id.button2);
         btnLeave = findViewById(R.id.button);
 
-        //txtUsername.setText("Welcome " + a.getUsername() + "you are currently in queue.");
+        //txtUsername.setText("Welcome " + a.getUsername() + ", you are currently in queue.");
 
         //generate string with 5 symbols
         qNo.setText(generateString(5));
+        timeLeft = 1;
+        /*db.addTicket(new Ticket(a.getUsername(), qNo.toString()));
+        Toast tt = Toast.makeText(QueueTicket.this, "Obtained New Ticket Number", Toast.LENGTH_LONG);
+        tt.show();*/
 
-        cdt = new CountDownTimer(1 * 60000, 1000) {
+        cdt = new CountDownTimer(timeLeft * 60000, 1000) {
             @Override
             public void onTick(long l) {
+                
                 Long min = l / 60000;
                 Long s = l % 60000 / 1000;
-                timeCount.setText("Time before your turn: " + "\n" + Long.toString(min) + ":" + Long.toString(s));
+                timeCount.setText("Estimated time before your turn: " + "\n" + Long.toString(min) + ":" + Long.toString(s));
             }
 
             @Override
             public void onFinish() {
-                timeCount.setText("Time before your turn: " + "\n" + "0:00");
+                timeCount.setText("Estimated time before your turn: " + "\n" + "0:00");
+                new AlertDialog.Builder(QueueTicket.this)
+                        .setMessage("Please proceed to the doctor's room as stated.")
+                        .show();
                 addNotification();
             }
         };
@@ -103,7 +118,7 @@ public class QueueTicket extends AppCompatActivity {
 
         Intent notificationIntent = new Intent(QueueTicket.this, QueueTicket.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
-                0);
+                Intent.FILL_IN_ACTION);
         //to be able to launch your activity from the notification
         builder.setContentIntent(contentIntent);
 

@@ -10,8 +10,11 @@ public class DbHandler extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "accountDB.db";
     public static final String ACCOUNTS = "Accounts";
+    public static final String TICKETS = "Tickets";
     public static final String COLUMN_USERNAME = "Username";
     public static final String COLUMN_PASSWORD = "Password";
+    public static final String COLUMN_QUEUETICKET = "QueueTicket";
+
 
     public DbHandler(Context c,
                      String name,
@@ -30,11 +33,17 @@ public class DbHandler extends SQLiteOpenHelper {
                 " (" + COLUMN_USERNAME + " TEXT," +
                 COLUMN_PASSWORD + " TEXT)";
         db.execSQL(CREATE_ACCOUNTS_TABLE);
+
+        String CREATE_TICKETS_TABLE = "CREATE TABLE " + TICKETS +
+                " (" + COLUMN_USERNAME + " TEXT," +
+                COLUMN_QUEUETICKET + " TEXT)";
+        db.execSQL(CREATE_TICKETS_TABLE);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + ACCOUNTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TICKETS);
         onCreate(db);
     }
 
@@ -46,6 +55,17 @@ public class DbHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db= this.getWritableDatabase();
         db.insert(ACCOUNTS, null, values);
+        db.close();
+    }
+
+    public void addTicket(Ticket t)
+    {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_QUEUETICKET, t.getTicket());
+        values.put(COLUMN_USERNAME, t.getUsername());
+
+        SQLiteDatabase db= this.getWritableDatabase();
+        db.insert(TICKETS, null, values);
         db.close();
     }
 
