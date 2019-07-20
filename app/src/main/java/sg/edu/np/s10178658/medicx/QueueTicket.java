@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,7 +46,7 @@ public class QueueTicket extends AppCompatActivity {
         timeCount = findViewById(R.id.textView16);
         counter = findViewById(R.id.textView17);
         timeStamp = findViewById(R.id.textView18);
-        btnBack = findViewById(R.id.button2);
+        btnBack = findViewById(R.id.btnBack);
         btnLeave = findViewById(R.id.button);
 
         //txtUsername.setText("Welcome " + a.getUsername() + ", you are currently in queue.");

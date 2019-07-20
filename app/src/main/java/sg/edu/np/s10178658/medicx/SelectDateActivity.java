@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -20,6 +21,7 @@ public class SelectDateActivity extends AppCompatActivity {
     public static final String TIME_TEXT = "sg.edu.np.s10178658.medicx.TIME_TEXT";
     Button confirm = findViewById(R.id.btnConfirm);
     Button selectDate = findViewById(R.id.btnDate);
+    Button back = findViewById(R.id.btnBack);
     TextView date = findViewById(R.id.tvSelectedDate);
     DatePickerDialog datePickerDialog;
     int year;
@@ -34,10 +36,18 @@ public class SelectDateActivity extends AppCompatActivity {
     EditText chooseTime = findViewById(R.id.etChooseTime);
     TimePickerDialog timePickerDialog;
 
+    DbHandler db;
+    DayOfAppointment da;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_date);
+
+        db = new DbHandler(this, null, null, 1);
+
+        Intent intent = getIntent();
+        String un = intent.getStringExtra(MainActivity.this, MainActivity.class);
 
         selectDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,21 +94,49 @@ public class SelectDateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 openPickTimeActivity();
+                String dbDate = date.getText().toString();
+                String dbTime = chooseTime.getText().toString();
+                if (dbDate.length() != 0 && dbTime.length() != 0){
+                    DayOfAppointment da = new DayOfAppointment(un, dbDate, dbTime);
+                    db.addTime(da);
+                }
+
+               /* String newEntry = date.getText().toString() + chooseTime.getText().toString();
+                if (date.length() != 0){
+                    DateTime dt = new DateTime(username, )
+                    AddTime(newEntry);
+                    date.setText("");
+                }
+                if (chooseTime.length() != 0){
+                    AddTime(newEntry);
+                    date.setText("");
+                }
+                else{
+                    Toast.makeText(SelectDateActivity.this, "Please Select A Day",Toast.LENGTH_LONG).show();
+                }*/
             }
         });
 
-        public void openPickTimeActivity(){
-            EditText editTextTime = findViewById(R.id.etChooseTime);
-            String time1 = editTextTime.getText().toString();
-            TextView textviewDate = findViewById(R.id.tvSelectedDate);
-            String date1 = textviewDate.getText().toString();
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SelectDateActivity.this, AppMainActivity.class));
+            }
+        });
 
-            Intent intent = new Intent(this, PickTimeActivity.class);
-            intent.putExtra(TIME_TEXT, time1);
-            intent.putExtra(DATE_TEXT, date1);
-            startActivity(intent);
-        }
     }
+    public void openPickTimeActivity(){
+        EditText editTextTime = findViewById(R.id.etChooseTime);
+        String time1 = editTextTime.getText().toString();
+        TextView textviewDate = findViewById(R.id.tvSelectedDate);
+        String date1 = textviewDate.getText().toString();
+
+        Intent intent = new Intent(this, PickTimeActivity.class);
+        intent.putExtra(TIME_TEXT, time1);
+        intent.putExtra(DATE_TEXT, date1);
+        startActivity(intent);
+    }
+
 
 
 }

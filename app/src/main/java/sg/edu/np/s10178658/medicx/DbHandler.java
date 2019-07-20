@@ -11,9 +11,12 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "accountDB.db";
     public static final String ACCOUNTS = "Accounts";
     public static final String TICKETS = "Tickets";
+    public static final String DAYOFAPPOINTMENT = "DateTime";
     public static final String COLUMN_USERNAME = "Username";
     public static final String COLUMN_PASSWORD = "Password";
     public static final String COLUMN_QUEUETICKET = "QueueTicket";
+    public static final String COLUMN_DATE = "Date";
+    public static final String COLUMN_TIME = "Time";
 
 
     public DbHandler(Context c,
@@ -38,12 +41,19 @@ public class DbHandler extends SQLiteOpenHelper {
                 " (" + COLUMN_USERNAME + " TEXT," +
                 COLUMN_QUEUETICKET + " TEXT)";
         db.execSQL(CREATE_TICKETS_TABLE);
+
+        String CREATE_TIME_TABLE = "CREATE TABLE " + DAYOFAPPOINTMENT +
+                " (" + COLUMN_USERNAME + " TEXT," +
+                COLUMN_DATE + " TEXT," +
+                COLUMN_TIME + " TEXT)";
+        db.execSQL(CREATE_TIME_TABLE);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + ACCOUNTS);
         db.execSQL("DROP TABLE IF EXISTS " + TICKETS);
+        db.execSQL("DROP TABLE IF EXISTS " + DAYOFAPPOINTMENT);
         onCreate(db);
     }
 
@@ -67,6 +77,24 @@ public class DbHandler extends SQLiteOpenHelper {
         SQLiteDatabase db= this.getWritableDatabase();
         db.insert(TICKETS, null, values);
         db.close();
+    }
+
+    public void addTime(DayOfAppointment da)
+    {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DATE, da.getDate());
+        values.put(COLUMN_TIME, da.getTime());
+        values.put(COLUMN_USERNAME, da.getUsername());
+
+        SQLiteDatabase db= this.getWritableDatabase();
+        db.insert(DAYOFAPPOINTMENT, null, values);
+        db.close();
+    }
+
+    public Cursor getListContents(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT * FROM " + DAYOFAPPOINTMENT,null);
+        return data;
     }
 
     public Account findAccount(String username)
