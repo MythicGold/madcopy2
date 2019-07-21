@@ -32,4 +32,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="174dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="27dp"
+        android:text="Book Appointment"
+        app:layout_constraintBottom_toTopOf="@+id/btnTixNum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 </android.support.constraint.ConstraintLayout>

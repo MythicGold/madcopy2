@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class AppMainActivity extends AppCompatActivity {
     Button btnTixNum;
+    Button btnBook;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -24,5 +25,18 @@ public class AppMainActivity extends AppCompatActivity {
                 startActivity(new Intent(AppMainActivity.this, QueueTicket.class));
             }
         });
+
+
+
+
+        btnBook = findViewById(R.id.btnBook);
+
+        btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AppMainActivity.this, SelectDateActivity.class));
+            }
+        });
+
     }
 }

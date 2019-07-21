@@ -47,7 +47,7 @@ public class SelectDateActivity extends AppCompatActivity {
         db = new DbHandler(this, null, null, 1);
 
         Intent intent = getIntent();
-        String un = intent.getStringExtra(MainActivity.this, MainActivity.class);
+        String usern = intent.getStringExtra(AppMainActivity.this, AppMainActivity.class);
 
         selectDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,12 +93,16 @@ public class SelectDateActivity extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                openPickTimeActivity();
                 String dbDate = date.getText().toString();
                 String dbTime = chooseTime.getText().toString();
                 if (dbDate.length() != 0 && dbTime.length() != 0){
-                    DayOfAppointment da = new DayOfAppointment(un, dbDate, dbTime);
+                    DayOfAppointment da = new DayOfAppointment(usern, dbDate, dbTime);
                     db.addTime(da);
+                    Toast.makeText(SelectDateActivity.this, "Success!",Toast.LENGTH_LONG).show();
+                    openPickTimeActivity();
+                }
+                else{
+                    Toast.makeText(SelectDateActivity.this, "Please Select A Day and Time",Toast.LENGTH_LONG).show();
                 }
 
                /* String newEntry = date.getText().toString() + chooseTime.getText().toString();
