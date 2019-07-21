@@ -87,17 +87,17 @@ public class SelectDateActivity extends AppCompatActivity {
             }
         });
 
-        public void openPickTimeActivity(){
-            EditText editTextTime = findViewById(R.id.etChooseTime);
-            String time1 = editTextTime.getText().toString();
-            TextView textviewDate = findViewById(R.id.tvSelectedDate);
-            String date1 = textviewDate.getText().toString();
+    }
+    public void openPickTimeActivity(){
+        EditText editTextTime = findViewById(R.id.etChooseTime);
+        String time1 = editTextTime.getText().toString();
+        TextView textviewDate = findViewById(R.id.tvSelectedDate);
+        String date1 = textviewDate.getText().toString();
 
-            Intent intent = new Intent(this, PickTimeActivity.class);
-            intent.putExtra(TIME_TEXT, time1);
-            intent.putExtra(DATE_TEXT, date1);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(this, PickTimeActivity.class);
+        intent.putExtra(TIME_TEXT, time1);
+        intent.putExtra(DATE_TEXT, date1);
+        startActivity(intent);
     }
 
 
