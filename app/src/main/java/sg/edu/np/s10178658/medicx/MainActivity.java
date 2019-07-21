@@ -137,15 +137,15 @@ public class MainActivity extends AppCompatActivity {
             Toast tt = Toast.makeText(MainActivity.this, "Valid Login Credentials", Toast.LENGTH_LONG); //LENGTH_LONG - toast appear for 3 seconds
             tt.show();
             //Bring user to AppMain page
-            startActivity(new Intent(MainActivity.this, AppMainActivity.class));
+            Intent intent = new Intent(MainActivity.this, AppMainActivity.class);
+            intent.putExtra("Username", a.getUsername());
+            startActivity(intent);
         }
         else
         {
             //Show toast message saying that login credentials are invalid
             Toast tt = Toast.makeText(MainActivity.this, "Invalid Login Credentials", Toast.LENGTH_LONG); //LENGTH_LONG - toast appear for 3 seconds
             tt.show();
-            //Not supposed to be here, for testing purposes only, without needing login credentials
-            startActivity(new Intent(MainActivity.this, AppMainActivity.class));
         }
     }
 }

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QueueTicket"></activity>
+        <activity android:name=".PickTimeActivity"></activity>
+        <activity android:name=".SelectDateActivity" />
+        <activity android:name=".QueueTicket" />
         <activity android:name=".ForgetPasswordActivity" />
         <activity android:name=".CreateNewUserActivity" />
         <activity android:name=".AppMainActivity" />
