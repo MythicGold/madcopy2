@@ -73,7 +73,7 @@ public class QueueTicket extends AppCompatActivity {
                 new AlertDialog.Builder(QueueTicket.this)
                         .setMessage("Please proceed to the doctor's room as stated.")
                         .show();
-                addNotification();
+                //addNotification();
             }
         };
         cdt.start();
@@ -109,7 +109,7 @@ public class QueueTicket extends AppCompatActivity {
         return builder.toString();
     }
 
-    private void addNotification(){
+    /*private void addNotification(){
         Notification.Builder builder = new Notification.Builder(this)
                 .setContentTitle("Madics")
                 .setContentText("Check your for your queue status!")
@@ -125,6 +125,6 @@ public class QueueTicket extends AppCompatActivity {
         NotificationManager notifManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.notify(001, builder.build());
-    }
+    }*/
 
 }
