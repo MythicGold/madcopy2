@@ -10,12 +10,16 @@ import android.widget.Button;
 public class AppMainActivity extends AppCompatActivity {
     Button btnTixNum;
     Button btnBook;
+    String txt;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_main);
+
+        Intent intent = getIntent();
+        txt = intent.getStringExtra("Username");
 
         btnTixNum = findViewById(R.id.btnTixNum);
 
@@ -26,15 +30,14 @@ public class AppMainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         btnBook = findViewById(R.id.btnBook);
 
         btnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AppMainActivity.this, SelectDateActivity.class));
+                Intent intent = new Intent(AppMainActivity.this, SelectDateActivity.class);
+                intent.putExtra("Username", txt);
+                startActivity(intent);
             }
         });
 

@@ -38,6 +38,7 @@ public class SelectDateActivity extends AppCompatActivity {
 
     DbHandler db;
     DayOfAppointment da;
+    String usern;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class SelectDateActivity extends AppCompatActivity {
         db = new DbHandler(this, null, null, 1);
 
         Intent intent = getIntent();
-        String usern = intent.getStringExtra(AppMainActivity.this, AppMainActivity.class);
+        usern = intent.getStringExtra("Username");
 
         selectDate.setOnClickListener(new View.OnClickListener() {
             @Override
