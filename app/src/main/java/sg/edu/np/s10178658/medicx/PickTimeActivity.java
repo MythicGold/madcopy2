@@ -34,10 +34,11 @@ public class PickTimeActivity extends AppCompatActivity {
             Toast.makeText(PickTimeActivity.this, "There is no appointment.", Toast.LENGTH_LONG).show();
         }
         else{
-            theList.add(data.getString(1));
-            ListAdapter listAdapter = new ArrayAdapter<>(this, R.layout.activity_list_adapter, theList);
-
+            while (data.moveToNext()){
+                theList.add(data.getString(1));
+            }
         }
-
+        ListAdapter listAdapter = new ArrayAdapter<>(this, R.layout.activity_list_adapter, theList);
+        listView.setAdapter(listAdapter);
     }
 }

@@ -19,21 +19,21 @@ public class SelectDateActivity extends AppCompatActivity {
 
     public static final String DATE_TEXT = "sg.edu.np.s10178658.medicx.DATE_TEXT";
     public static final String TIME_TEXT = "sg.edu.np.s10178658.medicx.TIME_TEXT";
-    Button confirm = findViewById(R.id.btnConfirm);
-    Button selectDate = findViewById(R.id.btnDate);
-    Button back = findViewById(R.id.btnBack);
-    TextView date = findViewById(R.id.tvSelectedDate);
+    Button confirm;
+    Button selectDate;
+    Button back;
+    TextView date;
     DatePickerDialog datePickerDialog;
     int year;
     int month;
     int dayOfMonth;
     Calendar calendar;
 
-    Calendar calendar1 = Calendar.getInstance();
-    int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-    int currentMinute = calendar.get(Calendar.MINUTE);
+    Calendar calendar1;
+    int currentHour;
+    int currentMinute;
     String amPm;
-    EditText chooseTime = findViewById(R.id.etChooseTime);
+    EditText chooseTime;
     TimePickerDialog timePickerDialog;
 
     DbHandler db;
@@ -45,6 +45,17 @@ public class SelectDateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_date);
 
+        confirm = findViewById(R.id.btnConfirm);
+        selectDate = findViewById(R.id.btnDate);
+        back = findViewById(R.id.btnBack);
+        date = findViewById(R.id.tvSelectedDate);
+
+        calendar1 = Calendar.getInstance();
+        currentHour = calendar1.get(Calendar.HOUR_OF_DAY);
+        currentMinute = calendar1.get(Calendar.MINUTE);
+        chooseTime = findViewById(R.id.etChooseTime);
+
+
         db = new DbHandler(this, null, null, 1);
 
         Intent intent = getIntent();
@@ -53,7 +64,7 @@ public class SelectDateActivity extends AppCompatActivity {
         selectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
+                calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
